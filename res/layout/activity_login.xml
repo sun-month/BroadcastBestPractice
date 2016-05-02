@@ -30,6 +30,15 @@
 
     <TableRow>
 
+        <CheckBox
+            android:id="@+id/remember"
+            android:layout_height="wrap_content"
+            android:layout_span="2"
+            android:text="@string/remember_password" />
+    </TableRow>
+
+    <TableRow>
+
         <Button
             android:id="@+id/login"
             android:layout_height="wrap_content"

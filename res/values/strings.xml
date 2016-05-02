@@ -7,6 +7,7 @@
     <string name="account">Account:</string>
     <string name="input_username">input your account!</string>
     <string name="password">Password:</string>
+    <string name="remember_password">remember password</string>
     <string name="input_password">input your password!</string>
     <string name="force_offline_broadcast">send force offline broadcast</string>
     <string name="action_settings">Settings</string>

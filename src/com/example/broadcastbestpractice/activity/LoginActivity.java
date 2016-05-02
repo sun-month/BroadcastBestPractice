@@ -1,10 +1,13 @@
 package com.example.broadcastbestpractice.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -15,6 +18,9 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	private EditText accountEdit;
 	private EditText passwordEdit;
 	private Button loginButton;
+	private CheckBox rememberPassCheckBox;
+	private SharedPreferences pre;
+	private SharedPreferences.Editor edit;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +29,21 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 		accountEdit = (EditText) findViewById(R.id.account);
 		passwordEdit = (EditText) findViewById(R.id.password);
 		loginButton = (Button) findViewById(R.id.login);
+		rememberPassCheckBox = (CheckBox) findViewById(R.id.remember);
+		pre = getPreferences(Context.MODE_PRIVATE);
 		loginButton.setOnClickListener(this);
+		boolean rememberpassword = pre.getBoolean("rememberpassword", false);
+		rememberPassCheckBox.setChecked(rememberpassword);
+		if (rememberpassword) {		// 如果保存了账户和密码,就填充
+			loadData();
+		}
+	}
+
+	private void loadData() {
+		String account = pre.getString("account", "");
+		String password = pre.getString("password", "");
+		accountEdit.setText(account);
+		passwordEdit.setText(password);
 	}
 
 	@Override
@@ -40,6 +60,16 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 				return;
 			}
 			if ("admin".equals(account) && "123".equals(password)) {
+				edit = pre.edit();
+				if (rememberPassCheckBox.isChecked()) {
+					edit.putBoolean("rememberpassword", true);
+					edit.putString("account", account);
+					edit.putString("password", password);
+				} else {
+					edit.clear();
+				}
+				edit.commit();
+
 				Intent intent = new Intent(this, MainActivity.class);
 				startActivity(intent);
 				finish();

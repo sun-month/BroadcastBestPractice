@@ -14,11 +14,11 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".activity.MainActivity"
+            android:name="com.example.broadcastbestpractice.activity.MainActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name=".activity.LoginActivity"
+            android:name="com.example.broadcastbestpractice.activity.LoginActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".broadcastReceiver.ForceOfflineReceiver" >
+        <receiver android:name="com.example.broadcastbestpractice.broadcastReceiver.ForceOfflineReceiver" >
             <intent-filter>
                 <action android:name="com.han.broadcastpractice.FORCE_OFFLINE" />
             </intent-filter>
